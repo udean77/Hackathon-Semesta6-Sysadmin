@@ -1,0 +1,17 @@
+- name: Clone App2 repository
+  git:
+    repo: 'https://github.com/islamyakin/semesta-app2.git'
+    dest: /opt/semesta-app2
+    version: master
+
+- name: Install dependencies for App2
+  npm:
+    path: /opt/semesta-app2
+    state: present
+
+- name: Start App2
+  command: npm start
+  args:
+    chdir: /opt/semesta-app2
+  environment:
+    NODE_ENV: production

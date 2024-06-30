@@ -1,0 +1,22 @@
+- name: Clone App1 repository
+  git:
+    repo: 'https://github.com/islamyakin/semesta-app1.git'
+    dest: /opt/semesta-app1
+    version: master
+
+- name: Copy environment file for App1
+  template:
+    src: env.j2
+    dest: /opt/semesta-app1/.env
+
+- name: Install dependencies for App1
+  npm:
+    path: /opt/semesta-app1
+    state: present
+
+- name: Start App1
+  command: npm start
+  args:
+    chdir: /opt/semesta-app1
+  environment:
+    NODE_ENV: production
